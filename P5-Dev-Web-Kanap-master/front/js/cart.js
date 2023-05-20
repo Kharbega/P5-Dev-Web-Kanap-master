@@ -59,7 +59,7 @@ if ( ArrayStorage.length === 0){
                       <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${ArrayStorage[k].quantity}">
                     </div>
                     <div class="cart__item__content__settings__delete">
-                      <p class="deleteItem">Supprimer </p>
+                      <button class="deleteItem" >Supprimer </button>
                     </div>
                   </div>
                 </div>
@@ -70,28 +70,49 @@ let article = document.querySelector("#cart__items > article");
 console.log(article.dataset)
 
 //**Identification du btn supprimer */
+//const deleteInput = document.querySelectorAll(".deleteItem")
 
 
 
+}
+  )} 
 
 
+}
 
   
+    
+const deleteInput = document.querySelectorAll(".deleteItem")
+
+
+      deleteInput.addEventListener("click", (e) => {
+    event.preventDefault()
+      console.log(e.target.value);
+    
       })
-    }
-    }
+      
+   
 
+/* for(let i =0 ; 1 < deleteInput.length; i++){
+  deleteInput[1].addEventListener("click", (event)=> {
+
+  console.log(Event);
+
+}
+  )} */
     ///*************ESSAIE DE L'EVENT DELETE */
-  
+  /* 
     const deleteInput = document.querySelectorAll(".deleteItem")
     console.log(deleteInput);
     
     for(let i =0 ; i = deleteInput.length; i++){
-      deleteInput.addEvenlister()
+      deleteInput[1].addEvenlister("click", (event)=> {
+
       console.log(Event);
     
     }
-
+      )}
+ */
     
 /* 
 let ProductStorage = {
