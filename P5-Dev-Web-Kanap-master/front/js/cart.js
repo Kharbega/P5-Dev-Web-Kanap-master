@@ -80,18 +80,29 @@ const deleteInput =  document.querySelectorAll(".deleteItem")
     deleteInput.forEach((deleteItem) => {
       deleteItem.addEventListener("click" , (e) => {
 
-        for(let i =0 ; i < deleteInput.length;i++){
+        for(let i =0 ; i < deleteInput.length; i++){
 console.log(e.target);
        
-let ProductDelete = ArrayStorage[i].idProduct
+let ProductDelete = ArrayStorage[k].idProduct + ArrayStorage[k].colorProduct
 console.log(ProductDelete)
-ArrayStorage = ArrayStorage.filter(mem => mem.idProduct != ArrayStorage[i].ProductDelete)
+ArrayStorage = ArrayStorage.filter(mem => mem.idProduct !== ArrayStorage[i].ProductDelete && mem.colorProduct !== ArrayStorage[i].colorProduct )
+
 console.log(ArrayStorage);
+localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
+
+alert("Produit supprimé du panier ");
+
+location.reload();
+
 }
-        
+
       });
+    //  alert("Produit supprime");
+     // window.location.href ="cart.html";
     });
-  
+   // location.reload();
+
+ 
    //const closest = deleteInput.closest("p.deleteItem")
    // console.log(closest);
   //  console.log(deleteInput.closest("deleteItem"));
