@@ -70,18 +70,34 @@ if ( ArrayStorage.length === 0){
 //*******************Identification des dataset pour id et color */
 
 //**Identification du btn supprimer */
-    const deleteInput =  document.querySelectorAll(".deleteItem")
+const deleteInput =  document.querySelectorAll(".deleteItem")
+
+  
+
+
    console.log(deleteInput);
+
     deleteInput.forEach((deleteItem) => {
       deleteItem.addEventListener("click" , (e) => {
-        console.log(e.target);
+
+        for(let i =0 ; i < deleteInput.length;i++){
+console.log(e.target);
+       
+let ProductDelete = ArrayStorage[i].idProduct
+console.log(ProductDelete)
+ArrayStorage = ArrayStorage.filter(mem => mem.idProduct != ArrayStorage[i].ProductDelete)
+console.log(ArrayStorage);
+}
+        
       });
     });
+  
    //const closest = deleteInput.closest("p.deleteItem")
    // console.log(closest);
   //  console.log(deleteInput.closest("deleteItem"));
     
-
+  
+        
     
 
    //  console.log(deleteItem);
