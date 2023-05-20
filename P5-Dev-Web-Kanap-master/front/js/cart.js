@@ -15,6 +15,8 @@ console.log(ArrayStorage);
 
 //******************CREATION VARIABLE QUI VA CONTENIR LES PRODUITS */
 const cartItems = document.getElementById("cart__items");
+
+
 //console.log(cartItems);
 
 //const cart__item__content__description = document.querySelector("#cart__items > article > div.cart__item__content > div.cart__item__content__description");
@@ -59,47 +61,99 @@ if ( ArrayStorage.length === 0){
                       <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${ArrayStorage[k].quantity}">
                     </div>
                     <div class="cart__item__content__settings__delete">
-                      <button class="deleteItem" >Supprimer </button>
+                    <p class="deleteItem">Supprimer </p>
                     </div>
                   </div>
                 </div>
               </article>`
               
 //*******************Identification des dataset pour id et color */
-let article = document.querySelector("#cart__items > article");
-console.log(article.dataset)
 
 //**Identification du btn supprimer */
-//const deleteInput = document.querySelectorAll(".deleteItem")
+    const deleteInput =  document.querySelectorAll(".deleteItem")
+   console.log(deleteInput);
+    deleteInput.forEach((deleteItem) => {
+      deleteItem.addEventListener("click" , (e) => {
+        console.log(e.target);
+      });
+    });
+   //const closest = deleteInput.closest("p.deleteItem")
+   // console.log(closest);
+  //  console.log(deleteInput.closest("deleteItem"));
+    
+
+    
+
+   //  console.log(deleteItem);
 
 
+     
+   
+  
+   /*  for (let i = 0; i < deleteInput.length; i++) {
+      const urlDelete =  deleteInput.length
+      fetch(urlDelete)
+   .then((res) => res.json())
+      .then ( (data) => {
+      let item = deleteInput[i];
+     */
+  //
+   // })
+    //  } 
+    
+      /**************/ 
+      }
+
+
+      
+  
+  )} 
+
+    }
+ 
+/* 
+const deleteInput = document.querySelector("#cart__items > article:nth-child(1) > div.cart__item__content > div.cart__item__content__settings > div.cart__item__content__settings__delete > p")
+console.log(deleteInput)
+//function DElete() {
+
+
+  deleteInput.addEventListener ("click" , () => {
+
+  console.log("click") })
+ */
+
+
+
+
+  // ESSAIE RECUPERER LES DONNES DE INPUT DELETE //
+  
+
+
+//console.log(deleteInput);
+
+/*
+      deleteInput.addEventListener("click", (e) => {
+      console.log(deleteInput);
+    
+      })
+       */
+
+      //const deleteInput = document.querySelectorAll(".deleteItem")
+
+   /*    const url = document.querySelectorAll(".deleteItem");
+      fetch(url)
+      .then((res) => res.json())
+      .then ( (data) =>  {
+
+for(let i =0 ; 1 < deleteInput.length; i++){
+
+  deleteInput[1].addEventListener("click", (e)=> {
+
+  console.log(e.target.value);
 
 }
   )} 
-
-
-}
-
-  
-    
-const deleteInput = document.querySelectorAll(".deleteItem")
-
-
-      deleteInput.addEventListener("click", (e) => {
-    event.preventDefault()
-      console.log(e.target.value);
-    
-      })
-      
-   
-
-/* for(let i =0 ; 1 < deleteInput.length; i++){
-  deleteInput[1].addEventListener("click", (event)=> {
-
-  console.log(Event);
-
-}
-  )} */
+}) */
     ///*************ESSAIE DE L'EVENT DELETE */
   /* 
     const deleteInput = document.querySelectorAll(".deleteItem")
