@@ -70,17 +70,29 @@ let article = document.querySelector("#cart__items > article");
 console.log(article.dataset)
 
 //**Identification du btn supprimer */
-const deleteInput = document.querySelectorAll(".deleteItem")
-console.log(deleteInput);
+
+
+
+
 
 
   
       })
     }
     }
+
+    ///*************ESSAIE DE L'EVENT DELETE */
   
+    const deleteInput = document.querySelectorAll(".deleteItem")
+    console.log(deleteInput);
+    
+    for(let i =0 ; i = deleteInput.length; i++){
+      deleteInput.addEvenlister()
+      console.log(Event);
+    
+    }
 
-
+    
 /* 
 let ProductStorage = {
   idProduct: id,
