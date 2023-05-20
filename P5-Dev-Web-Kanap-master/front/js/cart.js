@@ -72,26 +72,26 @@ if ( ArrayStorage.length === 0){
 //**Identification du btn supprimer */
 const deleteInput =  document.querySelectorAll(".deleteItem")
 
-  
-
-
    console.log(deleteInput);
-
+//**UTILISATION DE LA METHODE FOREACH POUR POUVOIR UTILISER UN EVEN SUR UN SEUL BOUTON  */
     deleteInput.forEach((deleteItem) => {
       deleteItem.addEventListener("click" , (e) => {
-
+//**UTILISATION DE LA BOUCLE FOR POUR CHQUE BTN QUI EXISTE  */
         for(let i =0 ; i < deleteInput.length; i++){
 console.log(e.target);
-       
+//**IDENTIFICATION DU PRODUIT ID ET COLOR QUE L'ON VOUDRA SUPPRIMER AU MOMENT DU CLICK */
 let ProductDelete = ArrayStorage[k].idProduct + ArrayStorage[k].colorProduct
 console.log(ProductDelete)
+
+//**UTILISATION DE LA FONCTION FILTER , POOUR NOUS SORTIR QUE LE PRODUIT QU'ON CLICK DESSUS  */
 ArrayStorage = ArrayStorage.filter(mem => mem.idProduct !== ArrayStorage[i].ProductDelete && mem.colorProduct !== ArrayStorage[i].colorProduct )
 
 console.log(ArrayStorage);
+//**ON ACTUALISE DONC ON SAUVEGARDE LES NOUVELLES DONNEES DU TABLEAU DANS LE LOCALSTORAGE */
 localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
-
+//**POP QUI INFORME QUE LE PRODUIT A ETE SUPPRIME */
 alert("Produit supprimé du panier ");
-
+//**RECHARGEMENT DE LA PAGE POUR QUE L'ACTUALISTION SE FASSE SUR LE DOM AUSSI */
 location.reload();
 
 }
