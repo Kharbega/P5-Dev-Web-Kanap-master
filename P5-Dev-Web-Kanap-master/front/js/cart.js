@@ -11,7 +11,7 @@ const cart__item__content__settings__quantity = document.querySelector("#cart__i
 
 //**************RECUPERATION DES PRODUITS QUI SONT DANS LE PANIER */
 let ArrayStorage = JSON.parse(localStorage.getItem("addToCart")) || []
-console.log(ArrayStorage);
+//console.log(ArrayStorage);
 
 //******************CREATION VARIABLE QUI VA CONTENIR LES PRODUITS */
 const cartItems = document.getElementById("cart__items");
@@ -67,25 +67,26 @@ if ( ArrayStorage.length === 0){
                 </div>
               </article>`
               
+//*******************SUPPRESSION D'UN ARTICLE */
 
 //**Identification du btn supprimer */
 const deleteInput =  document.querySelectorAll(".deleteItem")
 
-   console.log(deleteInput);
+   //console.log(deleteInput);
 //**UTILISATION DE LA METHODE FOREACH POUR POUVOIR UTILISER UN EVEN SUR UN SEUL BOUTON  */
     deleteInput.forEach((deleteItem) => {
       deleteItem.addEventListener("click" , (e) => {
 //**UTILISATION DE LA BOUCLE FOR POUR CHQUE BTN QUI EXISTE  */
         for(let i =0 ; i < deleteInput.length; i++){
-console.log(e.target);
+//console.log(e.target);
 //**IDENTIFICATION DU PRODUIT ID ET COLOR QUE L'ON VOUDRA SUPPRIMER AU MOMENT DU CLICK */
 let ProductDelete = ArrayStorage[k].idProduct + ArrayStorage[k].colorProduct
-console.log(ProductDelete)
+//console.log(ProductDelete)
 
 //**UTILISATION DE LA FONCTION FILTER , POOUR NOUS SORTIR QUE LE PRODUIT QU'ON CLICK DESSUS  */
 ArrayStorage = ArrayStorage.filter(mem => mem.idProduct !== ArrayStorage[i].ProductDelete && mem.colorProduct !== ArrayStorage[i].colorProduct )
 
-console.log(ArrayStorage);
+//console.log(ArrayStorage);
 //**ON ACTUALISE DONC ON SAUVEGARDE LES NOUVELLES DONNEES DU TABLEAU DANS LE LOCALSTORAGE */
 localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
 //**POP QUI INFORME QUE LE PRODUIT A ETE SUPPRIME */
@@ -96,15 +97,25 @@ location.reload();
 }
 
       });
-     // window.location.href ="cart.html";
     });
 //*******************SUPPRESSION D'UN ARTICLE */
 
- 
-   //const closest = deleteInput.closest("p.deleteItem")
-   // console.log(closest);
-  //  console.log(deleteInput.closest("deleteItem"));
-    
+//******************************CALCUL DU NOMBRE DE PRODUIT TOTAL */
+
+/********Paragraphe ou se trouve la soan pour afficher le prix totl darticle */
+let SpanNumberArticleTotal = document.querySelector("#totalQuantity")
+console.log(SpanNumberArticleTotal)
+for ( t= 0; t <  ArrayStorage.length;t++ ){
+
+  let numberOfArticleTotal = ArrayStorage.length;
+
+
+  console.log(numberOfArticleTotal)
+  SpanNumberArticleTotal.innerHTML += `${numberOfArticleTotal}`
+
+
+
+}
   
       }
 
