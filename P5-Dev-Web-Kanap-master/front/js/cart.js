@@ -67,7 +67,6 @@ if ( ArrayStorage.length === 0){
                 </div>
               </article>`
               
-//*******************Identification des dataset pour id et color */
 
 //**Identification du btn supprimer */
 const deleteInput =  document.querySelectorAll(".deleteItem")
@@ -97,10 +96,9 @@ location.reload();
 }
 
       });
-    //  alert("Produit supprime");
      // window.location.href ="cart.html";
     });
-   // location.reload();
+//*******************SUPPRESSION D'UN ARTICLE */
 
  
    //const closest = deleteInput.closest("p.deleteItem")
@@ -108,27 +106,6 @@ location.reload();
   //  console.log(deleteInput.closest("deleteItem"));
     
   
-        
-    
-
-   //  console.log(deleteItem);
-
-
-     
-   
-  
-   /*  for (let i = 0; i < deleteInput.length; i++) {
-      const urlDelete =  deleteInput.length
-      fetch(urlDelete)
-   .then((res) => res.json())
-      .then ( (data) => {
-      let item = deleteInput[i];
-     */
-  //
-   // })
-    //  } 
-    
-      /**************/ 
       }
 
 
