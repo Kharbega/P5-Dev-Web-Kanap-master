@@ -10,7 +10,7 @@ const cart__item__content__settings__quantity = document.querySelector("#cart__i
 
 
 //**************RECUPERATION DES PRODUITS QUI SONT DANS LE PANIER */
-let ArrayStorage = JSON.parse(localStorage.getItem("addToCart")) || []
+let ArrayStorage = JSON.parse(localStorage.getItem("addToCart")) || [];
 //console.log(ArrayStorage);
 
 //******************CREATION VARIABLE QUI VA CONTENIR LES PRODUITS */
@@ -29,7 +29,7 @@ const cartItems = document.getElementById("cart__items");
 if ( ArrayStorage.length === 0){
 // Si le panier est vide , on affiche dans la page le message le panier est vide //
     console.log("le panier est vide")
-    cartItems.innerHTML += `<div> Le panier est vide </div> `
+    cartItems.innerHTML+= `<div> Le panier est vide </div> `
 
 } else {
     console.log("le panier contient des produits ") 
@@ -67,55 +67,96 @@ if ( ArrayStorage.length === 0){
                 </div>
               </article>`
               
-//*******************SUPPRESSION D'UN ARTICLE */
+///*******************SUPPRESSION D'UN ARTICLE */
 
 //**Identification du btn supprimer */
-const deleteInput =  document.querySelectorAll(".deleteItem")
+//const deleteInput =  document.querySelectorAll(".deleteItem")
 
-   //console.log(deleteInput);
+//console.log(deleteInput);
 //**UTILISATION DE LA METHODE FOREACH POUR POUVOIR UTILISER UN EVEN SUR UN SEUL BOUTON  */
-    deleteInput.forEach((deleteItem) => {
-      deleteItem.addEventListener("click" , (e) => {
+  const deleteInput =  document.querySelectorAll(".deleteItem")
+
+console.log(deleteInput);
+
+ deleteInput.forEach((deleteItem) => {
+
+   deleteItem.addEventListener("click" , (e) => {
+//if (k== ArrayStorage.length -1){
+
+    let article = deleteItem.closest ("article");
+    let id = article.dataset.id;
+    let color = article.dataset.color;
+    console.log(id);
+    console.log(color);
+
 //**UTILISATION DE LA BOUCLE FOR POUR CHQUE BTN QUI EXISTE  */
-        for(let i =0 ; i < deleteInput.length; i++){
+
+    for(let i =0 ; i < deleteInput.length; i++){
 //console.log(e.target);
-//**IDENTIFICATION DU PRODUIT ID ET COLOR QUE L'ON VOUDRA SUPPRIMER AU MOMENT DU CLICK */
-let ProductDelete = ArrayStorage[k].idProduct + ArrayStorage[k].colorProduct
-//console.log(ProductDelete)
+//IDENTIFICATION DU PRODUIT ID ET COLOR QUE L'ON VOUDRA SUPPRIMER AU MOMENT DU CLICK 
+//let ProductDelete = ArrayStorage[i].idProduct + ArrayStorage[i].colorProduct
+//console.log(ProductDelete)s
 
-//**UTILISATION DE LA FONCTION FILTER , POOUR NOUS SORTIR QUE LE PRODUIT QU'ON CLICK DESSUS  */
-ArrayStorage = ArrayStorage.filter(mem => mem.idProduct !== ArrayStorage[i].ProductDelete && mem.colorProduct !== ArrayStorage[i].colorProduct )
+//UTILISATION DE LA FONCTION FILTER , POOUR NOUS SORTIR QUE LE PRODUIT QU'ON CLICK DESSUS  
 
+const deleteArticle = ArrayStorage.find(mem => mem.id == ArrayStorage.id && mem.color == ArrayStorage.color)
+console.log(deleteArticle);
+
+//if ( deleteArticle != undefined){
+   /* si on trouve l'article deleteArticle , tu me l'enleve du panier */
+
+
+
+  localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
+
+//}
+
+;
+/*
 //console.log(ArrayStorage);
-//**ON ACTUALISE DONC ON SAUVEGARDE LES NOUVELLES DONNEES DU TABLEAU DANS LE LOCALSTORAGE */
-localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
+ON ACTUALISE DONC ON SAUVEGARDE LES NOUVELLES DONNEES DU TABLEAU DANS LE LOCALSTORAGE */
+//localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
 //**POP QUI INFORME QUE LE PRODUIT A ETE SUPPRIME */
-alert("Produit supprimé du panier ");
+//alert("Produit supprimé du panier ");
 //**RECHARGEMENT DE LA PAGE POUR QUE L'ACTUALISTION SE FASSE SUR LE DOM AUSSI */
-location.reload();
+//location.reload();
+    
+    }
 
-}
 
-      });
-    });
+   });
+  
+ });
+      
+
+    
 //*******************SUPPRESSION D'UN ARTICLE */
 
 //******************************CALCUL DU NOMBRE DE PRODUIT TOTAL */
 
 /********Paragraphe ou se trouve la soan pour afficher le prix totl darticle */
-let SpanNumberArticleTotal = document.querySelector("#totalQuantity")
-console.log(SpanNumberArticleTotal)
-for ( t= 0; t <  ArrayStorage.length;t++ ){
-
-  let numberOfArticleTotal = ArrayStorage.length;
-
-
-  console.log(numberOfArticleTotal)
-  SpanNumberArticleTotal.innerHTML += `${numberOfArticleTotal}`
-
-
-
+if (k== ArrayStorage.length -1){
+  const SpanNumberArticleTotal = document.querySelector("#totalQuantity")
+  //console.log(SpanNumberArticleTotal)
+  
+  ArrayStorage = JSON.parse(localStorage.getItem("addToCart")) || [];
+      for ( t= 0; t <  ArrayStorage.length;t++ ){
+  //console.log(SpanNumberArticleTotal)
+       let numberOfArticleTotal =  ArrayStorage[t].quantity 
+        //const reducer = (accumalator ,currentValue)=> accumalator + currentValue;
+       //console.log(arraynew.reduce(reducer, 0))
+       
+        console.log(numberOfArticleTotal)
+        SpanNumberArticleTotal.textContent = Number(SpanNumberArticleTotal.textContent) + Number(numberOfArticleTotal);
+      
+      
+      
+      } 
 }
+
+  
+ 
+
   
       }
 
@@ -126,80 +167,85 @@ for ( t= 0; t <  ArrayStorage.length;t++ ){
 
     }
  
-/* 
-const deleteInput = document.querySelector("#cart__items > article:nth-child(1) > div.cart__item__content > div.cart__item__content__settings > div.cart__item__content__settings__delete > p")
-console.log(deleteInput)
-//function DElete() {
+   /*  for(let i =0 ; i < deleteInput.length; i++){
 
-
-  deleteInput.addEventListener ("click" , () => {
-
-  console.log("click") })
+      //console.log(e.target);
+      IDENTIFICATION DU PRODUIT ID ET COLOR QUE L'ON VOUDRA SUPPRIMER AU MOMENT DU CLICK 
+      let articledata =document.querySelector("#cart__items > article")
+      //console.log(articledata.dataset.id ,articledata.dataset.color);
+      let ProductDelete = (articledata.dataset.id + articledata.dataset.color)
+      console.log(ProductDelete)
+      
+      *UTILISATION DE LA FONCTION FILTER , POOUR NOUS SORTIR QUE LE PRODUIT QU'ON CLICK DESSUS  
+      //ArrayStorage = ArrayStorage.filter(mem => mem.idProduct !== ProductDelete && mem.colorProduct !== ProductDelete)
+      
+      //console.log(ArrayStorage);
+      ON ACTUALISE DONC ON SAUVEGARDE LES NOUVELLES DONNEES DU TABLEAU DANS LE LOCALSTORAGE 
+      localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
+      //**POP QUI INFORME QUE LE PRODUIT A ETE SUPPRIME 
+      alert("Produit supprimé du panier ");
+      //**RECHARGEMENT DE LA PAGE POUR QUE L'ACTUALISTION SE FASSE SUR LE DOM AUSSI 
+      location.reload();
  */
 
 
 
 
-  // ESSAIE RECUPERER LES DONNES DE INPUT DELETE //
+
+
+
+      /**************REGEX */
+
+
+
+
+      /*****SELECTION DE TOUT LES INPUT  */
+
+const inputs = document.querySelectorAll('input[type="text"], input[type="email"]');
+console.log(inputs);
+
+
+/*******FONCTION POUR CHECKER LES FORMULAIRES */
+const firstNameChecker = (value) => {
+  console.log(value);
+};
+const lastNameChecker = () => {};   
+const adressChecker = () => {};
+const cityChecker = () => {};
+const emailChecker = () => {};
+
+// EVENEMENT sur TOUT LES INPUT//
+
+inputs.forEach((input) => {
+
+  input.addEventListener("input", (e) => {
+    console.log(e.target.value);
+    switch(e.target.id) {
+      case "firstName" : 
+      firstNameChecker(e.target.value)
+      break;
+      case "lastName" :
+          lastNameChecker()
+          break;
+          case "adress" :
+              adressChecker()
+              break;
+              case "city" :
+                  cityChecker()
+                  break;
+                  case"email" :
+                  emailChecker()
+                  break;
+                  default:
+                    null;
+  }
   
-
-
-//console.log(deleteInput);
-
-/*
-      deleteInput.addEventListener("click", (e) => {
-      console.log(deleteInput);
-    
-      })
-       */
-
-      //const deleteInput = document.querySelectorAll(".deleteItem")
-
-   /*    const url = document.querySelectorAll(".deleteItem");
-      fetch(url)
-      .then((res) => res.json())
-      .then ( (data) =>  {
-
-for(let i =0 ; 1 < deleteInput.length; i++){
-
-  deleteInput[1].addEventListener("click", (e)=> {
-
-  console.log(e.target.value);
-
-}
-  )} 
-}) */
-    ///*************ESSAIE DE L'EVENT DELETE */
-  /* 
-    const deleteInput = document.querySelectorAll(".deleteItem")
-    console.log(deleteInput);
-    
-    for(let i =0 ; i = deleteInput.length; i++){
-      deleteInput[1].addEvenlister("click", (event)=> {
-
-      console.log(Event);
-    
-    }
-      )}
- */
-    
-/* 
-let ProductStorage = {
-  idProduct: id,
-  quantity: document.getElementById('quantity').value,
-  colorProduct: document.querySelector("#colors").value,
-}
-
-function removeProduct(product){
-  let ArrayStorage = JSON.parse(localStorage.getItem("addToCart")) //|| []
-  let filtreProduct  =  ArrayStorage[k].filtre((filtre)=> ProductStorage.idProduct != filtre.idProduct && filtre.colorProduct != ProductStorage.colorProduct ) ;
-  localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
-
   
-}
-removeProduct()
- 
- */
+  
+  
+  });
+  
+  });
 
 
 
