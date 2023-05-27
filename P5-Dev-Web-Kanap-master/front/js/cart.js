@@ -97,6 +97,7 @@ console.log(deleteInput);
 //let ProductDelete = ArrayStorage[i].idProduct + ArrayStorage[i].colorProduct
 //console.log(ProductDelete)s
 
+//ArrayStorage = ArrayStorage.filter(mem => mem.idProduct !== ArrayStorage[i].ProductDelete && mem.colorProduct !== ArrayStorage[i].colorProduct )
 //UTILISATION DE LA FONCTION FILTER , POOUR NOUS SORTIR QUE LE PRODUIT QU'ON CLICK DESSUS  
 
 const deleteArticle = ArrayStorage.find(mem => mem.id == ArrayStorage.id && mem.color == ArrayStorage.color)
@@ -194,7 +195,7 @@ if (k== ArrayStorage.length -1){
 
 
 
-      /**************REGEX */
+      /*****************************************************************************************************REGEX */
 
 
 
@@ -202,17 +203,76 @@ if (k== ArrayStorage.length -1){
       /*****SELECTION DE TOUT LES INPUT  */
 
 const inputs = document.querySelectorAll('input[type="text"], input[type="email"]');
-console.log(inputs);
 
+let firstName, lastName, adress, city, email;
 
 /*******FONCTION POUR CHECKER LES FORMULAIRES */
+
+// identification de la div qui contient le input firstName et tout les autres avec utilisation de tag et le message d'error //
+
+const errorDisplay =  (tag, message, valid) => {
+  const container = document.querySelector("#cartAndFormContainer > section > div.cart__order > form > div")
+ // console.log(container);
+  const pError =   document.querySelector("#" + tag + "ErrorMsg");
+/* 
+  console.log(pError);
+  document.querySelector("#firstNameErrorMsg")
+  console.log(pError); */
+
+  // S'il y a erreur on affiche un message erreur sinon on supprime le message d'erreur //
+
+  if (!valid) {
+      container.classList.add('error');
+      pError.textContent = message;
+  } else {
+      container.classList.remove('error');
+      pError.textContent = message
+  }
+}
+
 const firstNameChecker = (value) => {
-  console.log(value);
+
+  // Relever d'erreurs qui peuvent survenir , comme prenom court ou long , insertion de nombre et de caracteres speciaux //
+  if (value.length > 0 && (value.length < 3 || value.length > 20)){
+    errorDisplay("firstName", "Le prenom doit faire entre 3 et 20 caracteres");
+    firstName = null;
+
+  } else if (!value.match(/^[a-zA-Z0-9_-]*$/)) {
+    errorDisplay("firstName", "Le prenom ne doit pas contenir de caracteres speciaux");
+    firstName = null;
+// pas d'erreur , on ne met rien //
+    } else {
+     errorDisplay('firstName', "", true);
+     firstName = value;
+   
+    }
+ 
 };
-const lastNameChecker = () => {};   
-const adressChecker = () => {};
-const cityChecker = () => {};
-const emailChecker = () => {};
+const lastNameChecker = (value) => {
+  console.log(value);
+
+};   
+const adressChecker = (value) => {
+  console.log(value);
+
+};
+const cityChecker = (value) => {
+  console.log(value);
+
+};
+const emailChecker = (value) => {
+  if (!value.match(
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  )) {
+
+    errorDisplay('email', "L'adresse email n'est pas valide")
+    email = null;
+    } else {
+      errorDisplay('email', "", true)
+      email = value;
+    }
+
+};
 
 // EVENEMENT sur TOUT LES INPUT//
 
@@ -225,16 +285,16 @@ inputs.forEach((input) => {
       firstNameChecker(e.target.value)
       break;
       case "lastName" :
-          lastNameChecker()
+          lastNameChecker(e.target.value)
           break;
           case "adress" :
-              adressChecker()
+              adressChecker(e.target.value)
               break;
               case "city" :
-                  cityChecker()
+                  cityChecker(e.target.value)
                   break;
                   case"email" :
-                  emailChecker()
+                  emailChecker(e.target.value)
                   break;
                   default:
                     null;
