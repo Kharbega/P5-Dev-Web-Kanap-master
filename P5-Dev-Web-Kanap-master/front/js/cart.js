@@ -1,27 +1,11 @@
-/* const cartItems = document.querySelector("#cart__items");
-console.log("HELLO");
-
-const item__img = document.querySelector("#cart__items > article > div.cart__item__img");
-const cart__item__content__description = document.querySelector("#cart__items > article > div.cart__item__content > div.cart__item__content__description");
-
-const cart__item__content__settings__quantity = document.querySelector("#cart__items > article > div.cart__item__content > div.cart__item__content__settings > div.cart__item__content__settings__quantity");
-
- */
 
 
 //**************RECUPERATION DES PRODUITS QUI SONT DANS LE PANIER */
+
 let ArrayStorage = JSON.parse(localStorage.getItem("addToCart")) || [];
-//console.log(ArrayStorage);
 
 //******************CREATION VARIABLE QUI VA CONTENIR LES PRODUITS */
 const cartItems = document.getElementById("cart__items");
-
-
-//console.log(cartItems);
-
-//const cart__item__content__description = document.querySelector("#cart__items > article > div.cart__item__content > div.cart__item__content__description");
-
- 
 
 //*********** VERIFICATION SI LE PANIER EST VIDE OU CONTIENT DES PRODUITS/
 
@@ -70,68 +54,40 @@ if ( ArrayStorage.length === 0){
 ///*******************SUPPRESSION D'UN ARTICLE */
 
 //**Identification du btn supprimer */
-//const deleteInput =  document.querySelectorAll(".deleteItem")
 
-//console.log(deleteInput);
 //**UTILISATION DE LA METHODE FOREACH POUR POUVOIR UTILISER UN EVEN SUR UN SEUL BOUTON  */
   const deleteInput =  document.querySelectorAll(".deleteItem")
 
-console.log(deleteInput);
 
  deleteInput.forEach((deleteItem) => {
 
    deleteItem.addEventListener("click" , (e) => {
-//if (k== ArrayStorage.length -1){
 
     let article = deleteItem.closest ("article");
     let id = article.dataset.id;
     let color = article.dataset.color;
-    console.log(id);
-    console.log(color);
+  
 
-//**UTILISATION DE LA BOUCLE FOR POUR CHQUE BTN QUI EXISTE  */
-
-    for(let i =0 ; i < deleteInput.length; i++){
-//console.log(e.target);
-//IDENTIFICATION DU PRODUIT ID ET COLOR QUE L'ON VOUDRA SUPPRIMER AU MOMENT DU CLICK 
-//let ProductDelete = ArrayStorage[i].idProduct + ArrayStorage[i].colorProduct
-//console.log(ProductDelete)s
-
-//ArrayStorage = ArrayStorage.filter(mem => mem.idProduct !== ArrayStorage[i].ProductDelete && mem.colorProduct !== ArrayStorage[i].colorProduct )
 //UTILISATION DE LA FONCTION FILTER , POOUR NOUS SORTIR QUE LE PRODUIT QU'ON CLICK DESSUS  
 
-const deleteArticle = ArrayStorage.find(mem => mem.id == ArrayStorage.id && mem.color == ArrayStorage.color)
-console.log(deleteArticle);
-
-//if ( deleteArticle != undefined){
-   /* si on trouve l'article deleteArticle , tu me l'enleve du panier */
-
-
-
+console.log(ArrayStorage);
+ArrayStorage = ArrayStorage.filter(mem => mem.idProduct !== id || mem.colorProduct !== color )
   localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
 
-//}
 
-;
-/*
-//console.log(ArrayStorage);
-ON ACTUALISE DONC ON SAUVEGARDE LES NOUVELLES DONNEES DU TABLEAU DANS LE LOCALSTORAGE */
-//localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
 //**POP QUI INFORME QUE LE PRODUIT A ETE SUPPRIME */
-//alert("Produit supprimé du panier ");
+/alert("Produit supprimé du panier ");
 //**RECHARGEMENT DE LA PAGE POUR QUE L'ACTUALISTION SE FASSE SUR LE DOM AUSSI */
-//location.reload();
+location.reload();
     
-    }
-
 
    });
-  
+ 
  });
-      
+   
 
     
-//*******************SUPPRESSION D'UN ARTICLE */
+//*******************FIN SUPPRESSION D'UN ARTICLE */
 
 //******************************CALCUL DU NOMBRE DE PRODUIT TOTAL */
 
@@ -155,47 +111,54 @@ if (k== ArrayStorage.length -1){
       } 
 }
 
-  
- 
 
-  
+
+    //////////////////////////***********************************PRIX TOTAL DE LA COMMANDE */
+
+if (k== ArrayStorage.length -1){
+  //console.log(SpanNumberArticleTotal)
+  const SpanPriceTotal = document.querySelector("#totalPrice");
+
+  ArrayStorage = JSON.parse(localStorage.getItem("addToCart")) || [];
+      for ( t= 0; t <  ArrayStorage.length;t++ ){
+  //console.log(SpanNumberArticleTotal)
+  let PriceTotal =` ${data.price}` * ArrayStorage[t].quantity;
+  console.log(PriceTotal);
+
+  SpanPriceTotal.textContent = Number(SpanPriceTotal.textContent) + Number(PriceTotal);
+
       }
+    }
+     /********************************MODIFICATION QUNTITE DANS LE PANIER */
 
 
-      
+    const InputQuantity = document.querySelectorAll(".itemQuantity")
+    
+    
+    InputQuantity.forEach((itemQuantity) => {
+
+    itemQuantity.addEventListener('change', (e) => {
+     const quantity = Number (e.currentTarget.value)
+      console.log(quantity)
+      ArrayStorage[k].quantity = quantity
+      localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
+console.log(ArrayStorage)
+    
+    })
+    });
+  
+    }
+
+  
   
   )} 
 
     }
- 
-   /*  for(let i =0 ; i < deleteInput.length; i++){
-
-      //console.log(e.target);
-      IDENTIFICATION DU PRODUIT ID ET COLOR QUE L'ON VOUDRA SUPPRIMER AU MOMENT DU CLICK 
-      let articledata =document.querySelector("#cart__items > article")
-      //console.log(articledata.dataset.id ,articledata.dataset.color);
-      let ProductDelete = (articledata.dataset.id + articledata.dataset.color)
-      console.log(ProductDelete)
-      
-      *UTILISATION DE LA FONCTION FILTER , POOUR NOUS SORTIR QUE LE PRODUIT QU'ON CLICK DESSUS  
-      //ArrayStorage = ArrayStorage.filter(mem => mem.idProduct !== ProductDelete && mem.colorProduct !== ProductDelete)
-      
-      //console.log(ArrayStorage);
-      ON ACTUALISE DONC ON SAUVEGARDE LES NOUVELLES DONNEES DU TABLEAU DANS LE LOCALSTORAGE 
-      localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
-      //**POP QUI INFORME QUE LE PRODUIT A ETE SUPPRIME 
-      alert("Produit supprimé du panier ");
-      //**RECHARGEMENT DE LA PAGE POUR QUE L'ACTUALISTION SE FASSE SUR LE DOM AUSSI 
-      location.reload();
- */
 
 
-
-
-
-
-
-      /*****************************************************************************************************REGEX */
+   
+  
+      /***********************************************************REGEX *//////////////////////////////////////////
 
 
 
@@ -204,7 +167,7 @@ if (k== ArrayStorage.length -1){
 
 const inputs = document.querySelectorAll('input[type="text"], input[type="email"]');
 
-let firstName, lastName, adress, city, email;
+let firstName, lastName, address, city, email;
 
 /*******FONCTION POUR CHECKER LES FORMULAIRES */
 
@@ -230,6 +193,8 @@ const errorDisplay =  (tag, message, valid) => {
   }
 }
 
+/**************************************************************************************FIRSTNAME */
+
 const firstNameChecker = (value) => {
 
   // Relever d'erreurs qui peuvent survenir , comme prenom court ou long , insertion de nombre et de caracteres speciaux //
@@ -237,7 +202,7 @@ const firstNameChecker = (value) => {
     errorDisplay("firstName", "Le prenom doit faire entre 3 et 20 caracteres");
     firstName = null;
 
-  } else if (!value.match(/^[a-zA-Z0-9_-]*$/)) {
+  } else if (!value.match(/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/)) {
     errorDisplay("firstName", "Le prenom ne doit pas contenir de caracteres speciaux");
     firstName = null;
 // pas d'erreur , on ne met rien //
@@ -248,18 +213,64 @@ const firstNameChecker = (value) => {
     }
  
 };
+
+
+/**************************************************************************************LASTNAME */
+
 const lastNameChecker = (value) => {
-  console.log(value);
+   // Relever d'erreurs qui peuvent survenir , comme prenom court ou long , insertion de nombre et de caracteres speciaux //
+   if (value.length > 0 && (value.length < 3 || value.length > 20)){
+    errorDisplay("lastName", "Le prenom doit faire entre 3 et 20 caracteres");
+    lastName = null;
+
+  } else if (!value.match(/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/)){
+    errorDisplay("lastName", "Le nom ne doit pas contenir de caracteres speciaux");
+    lastName = null;
+// pas d'erreur , on ne met rien //
+    } else {
+     errorDisplay('lastName', "", true);
+     lastName = value;
+   
+    }
 
 };   
-const adressChecker = (value) => {
-  console.log(value);
+
+/**************************************************************************************ADRESS */
+
+const addressChecker = (value) => {
+  if (!value.match(/^([1-9][0-9]*(?:-[1-9][0-9]*)*)[\s,-]+(?:(bis|ter|qua)[\s,-]+)?([\w]+[\-\w]*)[\s,]+([-\w].+)$/)){
+
+   errorDisplay("address", "L'adresse n'est pas valide")
+    address = null;
+    } else {
+
+      errorDisplay('address', "", true)
+      address= value;
+
+    }
+  
 
 };
+
+
+/**************************************************************************************CITY */
+
 const cityChecker = (value) => {
-  console.log(value);
+
+  if (!value.match(/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/)) {
+    errorDisplay('city', "La saisie city est incorrecte")
+    city = null;
+
+  } else{
+    errorDisplay('city',"", true)
+    city = value;
+  }
 
 };
+
+
+/**************************************************************************************EMAIL */
+
 const emailChecker = (value) => {
   if (!value.match(
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -287,8 +298,8 @@ inputs.forEach((input) => {
       case "lastName" :
           lastNameChecker(e.target.value)
           break;
-          case "adress" :
-              adressChecker(e.target.value)
+          case "address" :
+              addressChecker(e.target.value)
               break;
               case "city" :
                   cityChecker(e.target.value)
@@ -307,5 +318,53 @@ inputs.forEach((input) => {
   
   });
 
+const form = document.querySelector("#cartAndFormContainer > section > div.cart__order > form")
+
+// envoi des donnees de la commande //
+if (ArrayStorage.length > 0 ) {
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (firstName && lastName && address && city && email  && ArrayStorage ) {
+    // envoi des donnees contact sous forme d'objet//
+    const contact = {
+      firstName,
+      lastName,
+      address,
+      city,
+      email,
+      
+    };
+    // envoi des id products sous forme d'objet //
+for (p=0; p < ArrayStorage.length;p++){
+    const products = {
+      id : ArrayStorage[p].idProduct,
+    }
+  
+console.log(products);
+  }
+    
 
 
+// verification que tout les champs ont ete bien rempli //
+    inputs.forEach((input) => (input.value = ""));
+     firstName = null;
+    lastName = null;
+      address = null;
+    city = null;
+    email = null;
+    alert("Commande validée !");
+// requete POST vers l'API //
+
+    fetch("http://localhost:3000/api/products",contact, products).then(() => {
+    console.log("commande envoye")
+    
+})
+  
+  } else {
+    alert("veuillez remplir correctement les champs");
+  }
+
+});
+} else {
+  alert("Le panier est vide ")
+}
