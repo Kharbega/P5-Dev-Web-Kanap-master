@@ -1,10 +1,11 @@
-spanOrderId = document.querySelector("#orderId");
+//PAGE CONFIRMATION //
 
+// Recupere l'orderId de l'url que l'api nous envoi//
+let orderId = new URLSearchParams(window.location.search).get('orderId')
 
-/* let order = new URLSearchParams(window.location.search).get('OrderId')
-spanOrderId.textContent = order;
-console.log(order); */
+// on cree une span pour afficher l'id dedans //
 
-fetch("http://localhost:3000/api/products",formulaire).then() => {
-    console.log("command envoye")
-}
+document.querySelector("#orderId").textContent += orderId;
+// on vide le panier apres avoir passe la commande 
+window.localStorage.clear()
+
