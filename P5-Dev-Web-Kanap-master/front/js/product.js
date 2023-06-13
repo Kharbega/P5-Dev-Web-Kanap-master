@@ -85,57 +85,23 @@ addToCart.addEventListener("click", (e) => {
      localStorage.setItem("addToCart", JSON.stringify(ArrayStorage))  
      
 } 
-/*console.log(foundProduct)
-console.log(foundProduct.quantity)
 
-let add = parseInt(foundProduct.quantity) + parseInt(ProductStorage.quantity)
-console.log(add)
-if (add > 100) {
-  ArrayStorage.quantity = 100;
-  let max = 100 - parseInt(foundProduct.quantity);
 
+let quantityTotal = parseInt(ProductStorage.quantity) + parseInt(foundProduct.quantity)
+console.log(quantityTotal)
+let max = 100 - quantityTotal;
 console.log(max)
-  if (max > 100) {
-    
-    alert('Quantité maximale atteinte !');
-  }
-} else {
-  ArrayStorage.quantity =max ;
+if (quantityTotal > 100) {
+  alert("Quantite maximal presque atteinte ")
+
+}if (max < 0 ){
+alert("100 articles ont ete mis dans le panier ,nombre maximum atteint")
+quantityTotal = ArrayStorage.quantity
+  localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
+location.reload("cart.html")
+
 }
 
-ArrayStorage.forEach((product) => {
-  if (product.idProduct == ProductStorage.idProduct && product.colorProduct == ProductStorage.colorProduct) {
-    if (add <= 100) {
-      product.quantity = parseInt(product.quantity) + parseInt(ProductStorage.quantity);
-    } else {
-      product.quantity = 100;
-    } 
-  }else {
-ArrayStorage.push(product)
-
-localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
-window.location.href = 'index.html';
-window.localStorage.clear()
-}
-/* else {
-// test le/les champs qui n'ont pas été renseigné.
-testContentFields(ProductStorage.quantity, ProductStorage.quantity)
-
-
-  }
-
-  
-});*/
-
-/* for (p =0; p < ArrayStorage.length;p++) {
-
- if (`${ArrayStorage[length].quantity }` < 100  ) {
-  
-  
-    alert(`Nombre maximum d'articles atteint  ${ArrayStorage[length].quantity }`)
- }
-
-}; */
 }); 
 
 
