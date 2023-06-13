@@ -1,15 +1,11 @@
 // PAGE ACCUEIL //
+
+
+//************ identification de la section *//
 section = document.getElementById('items');
-//*********AFFICHAGE DES PRODUITS DANS INDEX.HTML */
 
 
-//***************IDENTIFICATION DE LA SECTION  */
-
-
-
-
-
-//**************MISE EN PLACE DE LA FONCTION  */
+//**************MISE EN PLACE DE LA FONCTION  pour affcicher les produits  */
 
 function getAllProducts() {
 
