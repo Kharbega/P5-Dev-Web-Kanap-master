@@ -75,9 +75,16 @@ addToCart.addEventListener("click", (e) => {
   //******************* Si un produit avec le meme id et color ,on additionne seulement les quantitees*/
       if ( foundProduct != undefined){ 
      foundProduct.quantity =  parseInt(foundProduct.quantity) + parseInt (ProductStorage.quantity);
-
+     
+     if (foundProduct.quantity> 100) { alert("Nombre maximun d'articles atteint") 
+     foundProduct.quantity = 100
+    } 
+    
+    else { (Number(foundProduct.quantity) <=100)
+    
       localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
-      
+    }
+   
      }  else {
 
       ArrayStorage.quantity = 1 ;
@@ -86,21 +93,6 @@ addToCart.addEventListener("click", (e) => {
      
 } 
 
-
-let quantityTotal = parseInt(ProductStorage.quantity) + parseInt(foundProduct.quantity)
-console.log(quantityTotal)
-let max = 100 - quantityTotal;
-console.log(max)
-if (quantityTotal > 100) {
-  alert("Quantite maximal presque atteinte ")
-
-}if (max < 0 ){
-alert("100 articles ont ete mis dans le panier ,nombre maximum atteint")
-quantityTotal = ArrayStorage.quantity
-  localStorage.setItem("addToCart", JSON.stringify(ArrayStorage)) 
-location.reload("cart.html")
-
-}
 
 }); 
 
